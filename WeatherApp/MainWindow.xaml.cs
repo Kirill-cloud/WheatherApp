@@ -25,7 +25,7 @@ namespace WeatherApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        static string apiKey = "82b797b6ebc625032318e16f1b42c016";
+        static string apiKey =    "82b797b6ebc625032318e16f1b42c016";
         WeatherApi client = new WeatherApi(apiKey);
         string city = "Москва";
         OneCallWeatherApiResponse casts;
