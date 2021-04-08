@@ -162,7 +162,7 @@ namespace WeatherApp
 
 
         
-        #region Первый ответ долже быть единственным
+        #region Первый ответ должен быть единственным
         async Task StartRace(CancellationTokenSource loader)
         {
 
