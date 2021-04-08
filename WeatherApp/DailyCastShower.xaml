@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="WeatherApp.DailyCastShower"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WeatherApp"
+             mc:Ignorable="d" 
+             Background="Gray"
+             d:DesignHeight="450" d:DesignWidth="220">
+    <Grid>
+        <StackPanel >
+            <Label Name="Date" Content="Day"   HorizontalAlignment="Center" FontWeight="Bold" />
+            <Ellipse Width="150" Height="150"  HorizontalAlignment="Center" >
+                <Ellipse.Fill>
+                    <ImageBrush  x:Name="WeatherImg" Stretch="Uniform"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <DataGrid x:Name="tableDG" RowBackground="Gray" LoadingRow="tableDG_LoadingRow" GridLinesVisibility="None" HorizontalAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</UserControl>
