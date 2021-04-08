@@ -25,7 +25,7 @@ namespace WeatherApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        static string apiKey =    "82b797b6ebc625032318e16f1b42c016";
+        static string apiKey = "82b797b6ebc625032318e16f1b42c016";
         WeatherApi client = new WeatherApi(apiKey);
         string city = "Москва";
         OneCallWeatherApiResponse casts;
@@ -56,7 +56,7 @@ namespace WeatherApp
             load.Cancel();
             Dispatcher.Invoke(() => { ChangeLocation.IsEnabled = true; PG.Value = 100; });
         }
-        async Task run(CancellationToken ct)
+        async Task Run(CancellationToken ct)
         {
             do
             {
@@ -116,7 +116,7 @@ namespace WeatherApp
 
                 ChangeLocation.IsEnabled = false;
 
-                Task.Run(() => run(load));
+                Task.Run(() => Run(load));
                 Load(loader);
             }
         }
@@ -159,6 +159,10 @@ namespace WeatherApp
             PG.Value = 0;
             ChangeLocation.IsEnabled = true;
         }
+
+
+        
+        #region Первый ответ долже быть единственным
         async Task StartRace(CancellationTokenSource loader)
         {
 
@@ -166,12 +170,12 @@ namespace WeatherApp
             int[] taskId = { 1, 2, 3, 4, 5 };
 
             List<Task> tasks = new List<Task>();
-            
-            tasks.Add(Task.Run(async ()=> await MassiveResponse(2, token)));
-            tasks.Add(Task.Run(async ()=> await MassiveResponse(3, token)));
-            tasks.Add(Task.Run(async ()=> await MassiveResponse(1, token)));
-            tasks.Add(Task.Run(async ()=> await MassiveResponse(4, token)));
-            tasks.Add(Task.Run(async ()=> await MassiveResponse(5, token)));
+
+            tasks.Add(Task.Run(async () => await MassiveResponse(2, token)));
+            tasks.Add(Task.Run(async () => await MassiveResponse(3, token)));
+            tasks.Add(Task.Run(async () => await MassiveResponse(1, token)));
+            tasks.Add(Task.Run(async () => await MassiveResponse(4, token)));
+            tasks.Add(Task.Run(async () => await MassiveResponse(5, token)));
             //foreach (var item in tasks)
             //{
             //    item.Start();
@@ -179,9 +183,8 @@ namespace WeatherApp
 
             var finishedTask = await Task.WhenAny(tasks);
 
-                x.Cancel();
+            x.Cancel();
         }
-
         private async Task<bool> MassiveResponse(int arg1, CancellationToken token)
         {
             Random r = new Random((int)DateTime.Now.Ticks);
@@ -197,13 +200,16 @@ namespace WeatherApp
 
             if (!token.IsCancellationRequested)
             {
-            //    MessageBox.Show("method " + arg1 + "ends"); ;
+                //    MessageBox.Show("method " + arg1 + "ends"); ;
 
             }
             return true;
         }
+        #endregion
 
-        async Task TryLoad(CancellationTokenSource loader) //вынести графику выше //паттерн-заместитель 
+
+
+        async Task TryLoad(CancellationTokenSource loader)
         {
             Random r = new Random((int)DateTime.Now.Ticks);
 
