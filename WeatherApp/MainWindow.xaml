@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WeatherApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="395" Width="270.5">
+        Title="MainWindow" Height="500" Width="270.5">
     <Grid>
         <WrapPanel>
             <Button x:Name="BackwardButton" Content="&lt;&lt;" Click="PushBackward"/>
             <StackPanel >
+                <Label Content="Введите название города" />
                 <TextBox Name="CityInput" />
                 <ProgressBar x:Name="PG" Height="10" Value="0" Maximum="100" />
                 <Button Content="Сменить местоположение" Name="ChangeLocation" Click="ChangeLocationButtonClick"/>
