@@ -7,9 +7,12 @@ using System.Threading;
 
 namespace OpenWeatherApiLibrary.Tests
 {
+    
     [TestClass()]
     public class WeatherApiTests
     {
+        //тест может быть ложно отрицательным, если запустить все тесты сразу
+        //мешает тест со сбросом ipconfig
         [TestMethod()]
         public void NormalFlowGetForcastByCityNameTest()
         {
@@ -22,7 +25,7 @@ namespace OpenWeatherApiLibrary.Tests
             var actual = client.GetForcastByCityName(sityName);
 
             Assert.IsNotNull(actual);
-            Assert.AreEqual(assertedTimezone,actual.timezone);
+            Assert.AreEqual(assertedTimezone,actual.LocationName);
         }
         [TestMethod()]
         public void BadCityGetForcastByCityNameTest()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,9 +7,12 @@ namespace OpenWeatherApiLibrary
 {
     public class OneCallWeatherApiResponse
     {
-        public string timezone { get; set; }
-        public ulong timezone_offset { get; set; }
-        public List<DailyInfo> daily { get; set; }
+        [JsonProperty("timezone")]
+        public string LocationName { get; set; }
+        [JsonProperty("timezone_offset")]
+        public ulong TimezoneOffset { get; set; }
+        [JsonProperty("daily")]
+        public List<DailyInfo> DailyInfo { get; set; }
 
     }
 }

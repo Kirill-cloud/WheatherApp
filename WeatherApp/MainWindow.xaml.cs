@@ -32,7 +32,6 @@ namespace WeatherApp
         int dayIndex = 0;
         static CancellationTokenSource x = new CancellationTokenSource();
 
-
         public MainWindow()
         {
             InitializeComponent();
@@ -40,7 +39,7 @@ namespace WeatherApp
             {
                 casts = client.GetForcastByCityName(city);
                 CityName.Content = city;
-                stack.Children.Add(new DailyCastShower(casts.daily.ElementAt(dayIndex)));
+                stack.Children.Add(new DailyCastShower(casts.DailyInfo.ElementAt(dayIndex)));
                 BackwardButton.IsEnabled = false;
             }
             catch (Exception e)
@@ -48,7 +47,7 @@ namespace WeatherApp
                 e.Message.Length.ToString();
             }
             x = new CancellationTokenSource();
-            StartRace(x).Wait();
+            //StartRace(x);
         }
         async Task Break(CancellationTokenSource load)
         {
@@ -79,7 +78,7 @@ namespace WeatherApp
                 dayIndex++;
                 BackwardButton.IsEnabled = true;
                 stack.Children.Clear();
-                stack.Children.Add(new DailyCastShower(casts.daily.ElementAt(dayIndex)));
+                stack.Children.Add(new DailyCastShower(casts.DailyInfo.ElementAt(dayIndex)));
             }
             if (dayIndex == 7)
             {
@@ -95,7 +94,7 @@ namespace WeatherApp
                 dayIndex--;
                 ForwardButton.IsEnabled = true;
                 stack.Children.Clear();
-                stack.Children.Add(new DailyCastShower(casts.daily.ElementAt(dayIndex)));
+                stack.Children.Add(new DailyCastShower(casts.DailyInfo.ElementAt(dayIndex)));
             }
             if (dayIndex == 0)
             {
@@ -103,7 +102,6 @@ namespace WeatherApp
 
             }
         }
-
 
         private void ChangeLocationButtonClick(object sender, RoutedEventArgs e)
         {
@@ -132,7 +130,7 @@ namespace WeatherApp
 
                     retriesLeft = 0;
                     stack.Children.Clear();
-                    stack.Children.Add(new DailyCastShower(casts.daily.ElementAt(dayIndex)));
+                    stack.Children.Add(new DailyCastShower(casts.DailyInfo.ElementAt(dayIndex)));
                     PG.Value = 100;
                     CityName.Content = city;
                 }
@@ -159,9 +157,6 @@ namespace WeatherApp
             PG.Value = 0;
             ChangeLocation.IsEnabled = true;
         }
-
-
-        
         #region Первый ответ должен быть единственным
         async Task StartRace(CancellationTokenSource loader)
         {
@@ -176,10 +171,6 @@ namespace WeatherApp
             tasks.Add(Task.Run(async () => await MassiveResponse(1, token)));
             tasks.Add(Task.Run(async () => await MassiveResponse(4, token)));
             tasks.Add(Task.Run(async () => await MassiveResponse(5, token)));
-            //foreach (var item in tasks)
-            //{
-            //    item.Start();
-            //}
 
             var finishedTask = await Task.WhenAny(tasks);
 
@@ -200,14 +191,17 @@ namespace WeatherApp
 
             if (!token.IsCancellationRequested)
             {
-                //    MessageBox.Show("method " + arg1 + "ends"); ;
-
+                //MessageBox.Show("");
+                Dispatcher.Invoke(() =>
+                {
+                    var x = new testWindow();
+                    x.Title = arg1 + "-ый вызов";
+                    x.Show();
+                });
             }
             return true;
         }
         #endregion
-
-
 
         async Task TryLoad(CancellationTokenSource loader)
         {

@@ -1,8 +1,14 @@
-﻿namespace OpenWeatherApiLibrary
+﻿using Newtonsoft.Json;
+
+namespace OpenWeatherApiLibrary
 {
     public class WindInfo
     {
-        public double speed { get; set; }
-        public double deg { get; set; }
+
+        [JsonProperty("speed")]
+        public double Speed { get; set; }
+        [JsonProperty("deg")]
+        public double Degrees { get; set; }
+
     }
 }

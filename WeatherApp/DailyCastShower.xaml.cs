@@ -22,29 +22,29 @@ namespace WeatherApp
         {
             InitializeComponent();
 
-            string url = String.Format("http://openweathermap.org/img/wn/{0}@4x.png", day.weather[0].icon);
+            string url = String.Format("http://openweathermap.org/img/wn/{0}@4x.png", day.Weather[0].IconName);
 
             WeatherImg.ImageSource = new BitmapImage(new Uri(url));
 
-            var dateTime = new DateTime(1970, 1, 1).AddSeconds(day.dt);
+            var dateTime = new DateTime(1970, 1, 1).AddSeconds(day.DateUnix);
 
             Date.Content = dateTime.ToString().Substring(0, 10);
 
-            var aaa = new List<Anime>()
+            var table = new List<TableHelper>()
             {
-                new Anime(day.temp.morn, day.feels_like.morn),
-                new Anime(day.temp.day, day.feels_like.day),
-                new Anime(day.temp.eve, day.feels_like.eve),
-                new Anime(day.temp.night, day.feels_like.night),
+                new TableHelper(day.Temperature.Morning, day.FeelsLikeTemperature.Morning),
+                new TableHelper(day.Temperature.Day, day.FeelsLikeTemperature.Day),
+                new TableHelper(day.Temperature.Evening, day.FeelsLikeTemperature.Evening),
+                new TableHelper(day.Temperature.Night, day.FeelsLikeTemperature.Night),
             };
 
-            tableDG.ItemsSource = aaa;
+            tableDG.ItemsSource = table;
         }
-        class Anime
+        class TableHelper
         {
             public double Температура { get; set; }
             public double Ощущается_как { get; set; }
-            public Anime(double x, double y)
+            public TableHelper(double x, double y)
             {
                 Температура = x;
                 Ощущается_как = y;

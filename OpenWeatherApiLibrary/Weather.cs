@@ -1,8 +1,13 @@
-﻿namespace OpenWeatherApiLibrary
+﻿using Newtonsoft.Json;
+
+namespace OpenWeatherApiLibrary
 {
     public class Weather
     {
-        public string description { get; set; }
-        public string icon { get; set; }
+        [JsonProperty("description")]
+        public string Description { get; set; }
+        [JsonProperty("icon")]
+        public string IconName { get; set; }
+
     }
 }
