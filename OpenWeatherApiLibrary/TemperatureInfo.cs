@@ -1,13 +1,22 @@
-﻿namespace OpenWeatherApiLibrary
+﻿using Newtonsoft.Json;
+
+namespace OpenWeatherApiLibrary
 {
     public class TemperatureInfo
     {
-        public double day { get; set; }
-        public double night { get; set; }
-        public double eve { get; set; }
-        public double morn { get; set; }
-        public double min { get; set; }
-        public double max { get; set; }
+
+        [JsonProperty("day")]
+        public double Day { get; set; }
+        [JsonProperty("night")]
+        public double Night { get; set; }
+        [JsonProperty("eve")]
+        public double Evening { get; set; }
+        [JsonProperty("morn")]
+        public double Morning { get; set; }
+        [JsonProperty("min")]
+        public double Min { get; set; }
+        [JsonProperty("max")]
+        public double Max { get; set; }
 
     }
 }
